@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import escapeRegExp from 'escape-string-regexp'
+import sortBy from 'sort-by'
 
 class ListContacts extends Component {
     // added PropTypes as a static property on Class
@@ -39,6 +41,35 @@ class ListContacts extends Component {
     re-renders.
     */
     render() {
+        //instead of mapping through all of the contacts, we wanna map
+        //over the queried contacts. 
+        //we create a new variable that will map only the contacts that
+        //match a specific pattern
+        let showingContacts
+        //if this.state.query is truthy, meaning if someone has typed
+        //in antyhing in our input field we wanna figure out which 
+        //contacts match that specific pattern
+        //else (if there's no input in the field) we want to show all
+        //contacts
+        if (this.state.query) {
+            //make a new const that will make a match for text within a
+            //specific pattern
+            //- we pass an invocation of escapeRegExp to RegExp, passing it
+            //our query (this.state.query)
+            // - the second argument is the character 'i'
+            //- what escapeRegExp is saying is, if it finds any special
+            //RegExp characters like $, ``, etc, it will treat them like
+            // strings
+            // 'i' means 'IGNORE CASE'
+            const match = new RegExp(escapeRegExp(this.state.query, 'i'))
+
+            showingContacts = this.props.contacts.filter((contact) => match.test(contact.name))
+        } else {
+            showingContacts = this.props.contacts
+        }
+        
+        
+        
         return (
             //in react we can only return ONE element so to add our
             //input field we need to put all this inside one single div
@@ -66,8 +97,10 @@ class ListContacts extends Component {
                     COMPONENT */}
                     {/* After refactoring into a component, it is not receiving props
                     as an argument any longer so we need to add this before props
-                    this.props*/}
-                    {this.props.contacts.map((contact) => ( //map over contacts
+                    this.props* <<<<<<<<< DEPRECATED SINCE WE ADD SHOWING CONTACTS */}
+                    {/*{this.props.contacts.map((contact) => ( //map over contacts*/}
+                    {/*Map over filtered array of contacts matching a specific query*/}  }
+                    {showingContacts.map((contact) => (
                         <li key={contact.id} className='contact-list-item'>
                             <div className='contact-avatar' style={{
                                 backgroundImage: `url(${contact.avatarURL})`   //url is whatever the contact avatar is
