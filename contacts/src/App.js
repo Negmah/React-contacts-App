@@ -1,33 +1,29 @@
 import React, { Component ,} from 'react'
 import ListContacts from './ListContacts'
-
+// import everything as ContactsAPI
+import * as ContactsAPI from './utils/ContactsAPI'
 
 class App extends Component {
   //the variable content is put tinside our App component, so the App
   //component can manage that state
   // everytime that state changes, React will update the UI as well
 
+  // all the contacts were removed from the array to fetch them directly
+  // from the API
   state = {
-    contacts: [
-      {
-        "id": "ryan",
-        "name": "Ryan Florence",
-        "email": "ryan@reacttraining.com",
-        "avatarURL": "http://localhost:5001/ryan.jpg"
-      },
-      {
-        "id": "michael",
-        "name": "Michael Jackson",
-        "email": "michael@reacttraining.com",
-        "avatarURL": "http://localhost:5001/michael.jpg"
-      },
-      {
-        "id": "tyler",
-        "name": "Tyler McGinnis",
-        "email": "tyler@reacttraining.com",
-        "avatarURL": "http://localhost:5001/tyler.jpg"
-      }
-    ]
+    contacts: []
+  }
+  // When our component mounts we make an API request
+  // When that API request resolves, the function will be invoked with
+  //a specific data (contacts)
+  // Then when we have those (contacts) we call setState, which updates
+  //our state, that causes a rerender of our component, which then
+  //passes our new contacts down to our <ListContacts /> component,
+  //which then renders them to the view
+  componentDidMount() {
+    ContactsAPI.getAll().then((contacts) => {
+      this.setState({ contacts: contacts })
+    })
   }
 
   // • to remove contacts we will make a function in our App Component,

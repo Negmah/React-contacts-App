@@ -40,6 +40,10 @@ class ListContacts extends Component {
     4 - Because its state has changed, the ListContacts component
     re-renders.
     */
+
+    /* >>> EXTERNAL API DATA SHOULD NOT BE FETCHED WITH AJAX REQUESTS
+    IN RENDER *EVER*
+    RENDER IS FOR RENDERING ONLY*/
     render() {
 
         // >>>>>>> DESTRUCTURING
