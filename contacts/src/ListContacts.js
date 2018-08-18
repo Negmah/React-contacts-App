@@ -67,6 +67,8 @@ class ListContacts extends Component {
         } else {
             showingContacts = this.props.contacts
         }
+
+        showingContacts.sort(sortBy('name'))
         
         
         
