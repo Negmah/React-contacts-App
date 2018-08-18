@@ -13,7 +13,8 @@ function ListContacts (props) {
                         <p>{contact.name}</p>
                         <p>{contact.email}</p>
                     </div>
-                    <button className='contact-remove'>
+                    {/* call props onDeleteContact */}
+                    <button onClick={() => props.onDeleteContact(contact)} className='contact-remove'>
                         Remove
                     </button>
                 </li>
