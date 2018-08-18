@@ -9,13 +9,14 @@ class ListContacts extends Component {
     }
 
     state = {
-        query: 
+        // query is a string
+        query: ''
     }
 
     //whenever the input field changes we want to update
     //our query
     //create an updateQuery method that takes in a new (query)
-    updateQuery = () => {
+    updateQuery = (query) => {
         ///update the state
         //we will not update the state based on previous state so we
         //can just pass an object and use trim() to remove extra white
@@ -25,12 +26,25 @@ class ListContacts extends Component {
 
     }
 
-
+    /*Because it is React that ultimately controls the value of our input
+    form element, we consider this component a Controlled Component.
+    To recap how user input affects the ListContacts component's own
+    state:
+    1 - The user enters text into the input field.
+    2 - An event listener invokes the updateQuery() function on every
+    onChange event.
+    3 - updateQuery() then calls setState(), merging in the new state
+    to update the component's internal state.
+    4 - Because its state has changed, the ListContacts component
+    re-renders.
+    */
     render() {
         return (
             //in react we can only return ONE element so to add our
             //input field we need to put all this inside one single div
             <div className='list-contacts'>
+                {/*command to log this.state to the app*/}
+                {JSON.stringify(this.state)}
                 <div>
                     <input className='search-contacts'
                     type='text'
@@ -39,9 +53,12 @@ class ListContacts extends Component {
                     //this.state.query is
                     value={this.state.query}
                     //after updateQuery, whenever the input field changes
-                    //give us an (event)
+                    //this will give us (event) and then we will invoke
+                    //updateQuery, passing it a specific value
+                    //event is getting the value of the input field
                     onChange={(event) => this.updateQuery(event.target.value)}
                     >
+                    </input>
                 </div>
                 <ol className='contact-list'>
                     {/*Access contacts in ContactList Component from
