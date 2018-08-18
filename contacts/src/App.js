@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-
+import React, { Component } from 'react'
+import ListContacts from './ListContacts'
 const contacts = [
   {
     "id": "ryan",
@@ -25,7 +25,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        Hello world 
+        <ListContacts contacts={contacts}/>
       </div>
     )
   }
