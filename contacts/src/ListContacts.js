@@ -41,6 +41,14 @@ class ListContacts extends Component {
     re-renders.
     */
     render() {
+
+        // >>>>>>> DESTRUCTURING
+        const { contacts, onDeleteContact } = this.props
+        const { query } = this.state
+        
+        
+        
+        
         //instead of mapping through all of the contacts, we wanna map
         //over the queried contacts. 
         //we create a new variable that will map only the contacts that
@@ -51,7 +59,7 @@ class ListContacts extends Component {
         //contacts match that specific pattern
         //else (if there's no input in the field) we want to show all
         //contacts
-        if (this.state.query) {
+        if (query) {
             //make a new const that will make a match for text within a
             //specific pattern
             //- we pass an invocation of escapeRegExp to RegExp, passing it
@@ -61,11 +69,11 @@ class ListContacts extends Component {
             //RegExp characters like $, ``, etc, it will treat them like
             // strings
             // 'i' means 'IGNORE CASE'
-            const match = new RegExp(escapeRegExp(this.state.query, 'i'))
+            const match = new RegExp(escapeRegExp(query, 'i'))
 
-            showingContacts = this.props.contacts.filter((contact) => match.test(contact.name))
+            showingContacts = contacts.filter((contact) => match.test(contact.name))
         } else {
-            showingContacts = this.props.contacts
+            showingContacts = contacts
         }
 
         showingContacts.sort(sortBy('name'))
@@ -84,7 +92,7 @@ class ListContacts extends Component {
                     placeholder='Search contacts'
                     //we want the value of the query to always be what
                     //this.state.query is
-                    value={this.state.query}
+                    value={query}
                     //after updateQuery, whenever the input field changes
                     //this will give us (event) and then we will invoke
                     //updateQuery, passing it a specific value
@@ -112,7 +120,7 @@ class ListContacts extends Component {
                                 <p>{contact.email}</p>
                             </div>
                             {/* call props onDeleteContact */}
-                            <button onClick={() => this.props.onDeleteContact(contact)} className='contact-remove'>
+                            <button onClick={() => onDeleteContact(contact)} className='contact-remove'>
                             Remove
                             </button>
                         </li>
@@ -143,16 +151,3 @@ class ListContacts extends Component {
 
 
 export default ListContacts
-
-
-
-
-
-
-
-
-
-
-
-
-
