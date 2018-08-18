@@ -14,6 +14,9 @@ class ListContacts extends Component {
                             <p>{contact.name}</p>
                             <p>{contact.email}</p>
                         </div>
+                        <button className='contact-remove'>
+                            Remove
+                        </button>
                     </li>
                 )}
             </ol>
