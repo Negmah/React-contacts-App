@@ -59,6 +59,12 @@ class App extends Component {
     // state
 /*  this.setState({
     }) */
+
+    //Now we are getting our contacts from the external API but also when
+    //we remove a contact it's removing it from our local state (see
+    // method above removeContact) but it is also making a request to
+    // remove it from our database somewhere 
+    ContactsAPI.remove(contact)
   }
   render() {
     return (
