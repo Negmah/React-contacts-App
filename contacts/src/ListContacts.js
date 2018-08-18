@@ -1,4 +1,5 @@
-import React , { Component } from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 
 function ListContacts (props) {
     return (
@@ -21,6 +22,16 @@ function ListContacts (props) {
             )}
         </ol>
     )
+}
+
+// it will have 2 properties on this ListContacts:
+// contacts and onDeleteContact
+// and we will define the value of each propertie key's type
+// this allows to specify the types of the props we pass on to a
+// component and also allows us to specify if they are required or not
+ListContacts.PropTypes = {
+    contacts: PropTypes.array.isRequired,
+    onDeleteContact: PropTypes.func.isRequired
 }
 
 

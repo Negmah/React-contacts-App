@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component ,} from 'react'
 import ListContacts from './ListContacts'
 
 
@@ -71,7 +71,8 @@ class App extends Component {
           // we want to invoke onDeleteContact on the button so
           // we call it on LisContacts.js
           onDeleteContact={this.removeContact}
-          contacts={contacts}
+          // add this.state because contacts is now inside state
+          contacts={this.state.contacts}
         />
       </div>
     )
