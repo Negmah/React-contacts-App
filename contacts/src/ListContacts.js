@@ -10,6 +10,10 @@ class ListContacts extends Component {
                         <div className='contact-avatar' style={{
                             backgroundImage: `url(${contact.avatarURL})`   //url is whatever the contact avatar is
                         }}/>
+                        <div className='contact-details'>
+                            <p>{contact.name}</p>
+                            <p>{contact.email}</p>
+                        </div>
                     </li>
                 )}
             </ol>
