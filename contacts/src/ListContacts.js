@@ -148,10 +148,13 @@ class ListContacts extends Component {
 //component again in order to have a state, and moved PropTypes up as a
 // static prop of the ListContacts class
 
-/*ListContacts.PropTypes = {
+
+// the first proptype is with lowercase 'p'
+// the other PropTypes are with uppercase 'P'
+ListContacts.propTypes = {
     contacts: PropTypes.array.isRequired,
     onDeleteContact: PropTypes.func.isRequired
-}*/
+}
 
 
 export default ListContacts
