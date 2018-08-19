@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
@@ -81,16 +82,14 @@ class ListContacts extends Component {
         }
 
         showingContacts.sort(sortBy('name'))
-        
-        
-        
+
         return (
             //in react we can only return ONE element so to add our
             //input field we need to put all this inside one single div
             <div className='list-contacts'>
                 {/*command to log this.state to the app*/}
                 {JSON.stringify(this.state)}
-                <div>
+                <div className='list-contacts-top'>
                     <input className='search-contacts'
                     type='text'
                     placeholder='Search contacts'
@@ -104,7 +103,26 @@ class ListContacts extends Component {
                     onChange={(event) => this.updateQuery(event.target.value)}
                     >
                     </input>
+                    {/*following item was before an anchor <a></a> element*/}
+                    {/*DEPRECATED >>> CONVERTED TO LINK*/}
+                    <Link
+                        /* href='/#create' converts to the following*/
+                        to='/create'
+                        //when clicked, the button should switch between contacts to
+                        //create contact screen
+                        //ALSO React Router manages onClick for us so we can remove this
+                        /*onClick={this.props.onNavigate}*/
+                        className='add-contact'
+                    >Add Contact</Link>
                 </div>
+
+                {showingContacts.length !== contacts.length && (
+                    <div className='showing-contacts'>
+                        <span>Now showing {showingContacts.length} of {contacts.length} total</span>
+                        <button onClick={this.clearQuery}>Show all</button>
+                    </div>
+                )}
+
                 <ol className='contact-list'>
                     {/*Access contacts in ContactList Component from
                     App.js through props* <<<<< DEPRECATED SINCE WE REFACTORED TO A
@@ -128,6 +146,7 @@ class ListContacts extends Component {
                             Remove
                             </button>
                         </li>
+                    
                     ))}
                 </ol>
             </div>

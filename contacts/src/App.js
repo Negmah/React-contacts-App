@@ -1,7 +1,9 @@
 import React, { Component ,} from 'react'
+import { Route } from 'react-router-dom'
 import ListContacts from './ListContacts'
 // import everything as ContactsAPI
 import * as ContactsAPI from './utils/ContactsAPI'
+import CreateContact from './CreateContact'
 
 class App extends Component {
   //the variable content is put tinside our App component, so the App
@@ -11,6 +13,12 @@ class App extends Component {
   // all the contacts were removed from the array to fetch them directly
   // from the API
   state = {
+    //the idea is not to render both screens at the same time
+    //(createcontact and contacts); the idea is to pick what screen
+    //we want to show
+    //we need a state to decide which screen we want to show
+    //DEPRECATED - only to show how ROUTE worked
+    /*screen: 'list', // list, create*/
     contacts: []
   }
   // When our component mounts we make an API request
@@ -68,14 +76,26 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
-        <ListContacts
-          // we want to invoke onDeleteContact on the button so
-          // we call it on LisContacts.js
-          onDeleteContact={this.removeContact}
-          // add this.state because contacts is now inside state
-          contacts={this.state.contacts}
-        />
+      <div className='app'>
+        {/*DEPRECATED ONLY FOR DEMONSTRATING HOW A ROUTER WORKS*/}
+        {/*this.state.screen === 'list' && (*/}
+        <Route exact path='/' render={() => (
+          <ListContacts
+            // add this.state because contacts is now inside state
+            contacts={this.state.contacts}
+            // we want to invoke onDeleteContact on the button so
+            // we call it on LisContacts.js
+            onDeleteContact={this.removeContact}
+            //function to toggle screens
+            //DEPRECATED - only to show how ROUTE works
+            /*onNavigate={() => {
+              this.setState({ screen: 'create' })
+            }}*/
+          />
+        )}/>
+        {/*DEPRECATED ONLY FOR DEMONSTRATING HOW A ROUTER WORKS*/}
+        {/*this.state.screen === 'create' && (*/}
+        <Route path='/create' component={CreateContact}/>
       </div>
     )
   }
